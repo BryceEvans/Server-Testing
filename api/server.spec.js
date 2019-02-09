@@ -38,14 +38,25 @@ describe('/get friends', () => {
 })
 
 describe('/post friends', () => {
-  it('', async () => {
-      
+
+  afterEach(async () => {
+    await db('friends').truncate();
   })
-  it('', async () => {
-    
+
+  it('responds with 201 wien body is correct', async () => {
+    const body = { name: "Bryce" };
+    const response = await request(server).post('/friends').send(body);
+    expect(response.status).toBe(201);
   })
-  it('', async () => {
-    
+  it('responds with 400 when body is missing data', async () => {
+    const body = {};
+    const response = await request(server).post('/friends').send(body);
+    expect(response.body).toBe(400);
+  })
+  it('responds with an array containng a new id', async () => {
+    const body = { name: "Bryce" };
+    const response = await request(server).post('/friends').send(body);
+    expect(response.body.length).toBe(1);
   })
 })
 
