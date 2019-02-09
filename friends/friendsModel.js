@@ -9,7 +9,7 @@ module.exports = {
 };
 
 async function insert(friend) {
-  return null;
+  return db('friends').insert(friend);
 }
 
 async function update(id, changes) {
