@@ -51,7 +51,7 @@ describe('/post friends', () => {
   it('responds with 400 when body is missing data', async () => {
     const body = {};
     const response = await request(server).post('/friends').send(body);
-    expect(response.body).toBe(400);
+    expect(response.status).toBe(400);
   })
   it('responds with an array containng a new id', async () => {
     const body = { name: "Bryce" };

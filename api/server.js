@@ -15,4 +15,15 @@ server.get('/friends', async (req, res) => {
   res.status(200).json(rows);
 })
 
+server.post('/friends', async (req, res) => {
+  const friendData = req.body;
+
+  if (friendData.name) {
+    const ids = await friends.insert(friendData);
+    res.status(201).json(ids);
+  } else {
+    res.status(400).json({ error: "missing name in body" });
+  }
+})
+
 module.exports = server;
